@@ -27,7 +27,11 @@ public class TextFormat {
         writer.flush();
     }
 
-    private static String getKey(Artifact artifact) {
-        return artifact.getGroupId() + ":" + artifact.getArtifactId() + ":" + artifact.getVersion() + ":" + artifact.getType();
+    private static String getKey(Artifact a) {
+        // if a.getVersion() is used, the resolved version is used. Might be a feature for someone.
+        return a.getGroupId() + ":" +
+                a.getArtifactId() + ":" +
+                a.getBaseVersion() + ":" +
+                a.getType();
     }
 }
