@@ -32,16 +32,24 @@ public class ExportClasspathMojo extends AbstractMojo {
     @Parameter(property = "project", required = true, readonly = true)
     private MavenProject project;
 
-    @Parameter(defaultValue = "${basedir}", property = "classpath.outputDirectory")
+    @Parameter(property = "classpath.outputDirectory", defaultValue = "${basedir}")
     private File outputDirectory;
 
-    @Parameter(defaultValue = "classpath.txt", property = "classpath.file")
+    @Parameter(property = "classpath.file", defaultValue = "classpath.txt")
     private String file;
 
-    @Parameter(property = "sort", defaultValue = "true")
+    @Parameter(property = "classpath.sort", defaultValue = "true")
     private boolean sort;
 
+    @Parameter(defaultValue = "false")
+    private boolean skip;
+
     public void execute() throws MojoExecutionException, MojoFailureException {
+        if (skip) {
+            getLog().debug("Skipping execution.");
+            return;
+        }
+
         Artifact artifact = project.getArtifact();
         List<Artifact> artifacts = new ArrayList<Artifact>(project.getArtifacts());
 
