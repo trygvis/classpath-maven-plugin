@@ -2,8 +2,8 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>eu.nets.oss.maven</groupId>
-    <artifactId>nets-parent-oss</artifactId>
-    <version>1-SNAPSHOT</version>
+    <artifactId>nets-oss-parent</artifactId>
+    <version>1</version>
   </parent>
   <artifactId>classpath-maven-plugin</artifactId>
   <version>1.0-SNAPSHOT</version>
