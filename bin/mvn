@@ -1,0 +1,26 @@
+#!/bin/bash
+
+v=3.9.5
+url="https://dlcdn.apache.org/maven/maven-3/$v/binaries/apache-maven-$v-bin.zip"
+
+set -euo pipefail
+
+basedir="${0%/*}"
+basedir=$(cd "$basedir" && pwd)
+bin="${basedir}/.mvn/apache-maven-$v/bin/mvn"
+zip="${basedir}/.mvn/apache-maven-$v-bin.zip"
+
+if [ ! -x "$bin" ]
+then
+  set -x
+
+  if [ ! -r $zip ]
+  then
+    mkdir -p "${zip%/*}"
+    wget "$url" -O "$zip"
+  fi
+
+  unzip -q "$zip" -d "${basedir}/.mvn"
+fi
+
+exec "$bin" "${@}"
